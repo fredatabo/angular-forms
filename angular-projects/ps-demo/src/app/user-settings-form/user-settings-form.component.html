@@ -1,0 +1,99 @@
+<div class="container">
+    <h2>User Settings</h2>
+    <form #form = "ngForm" (ngSubmit) = "onSubmit(form)">
+        <div class="form-group">
+            <label for = "name">Name</label>
+             <input id = "name" name="name" class="form-control" [(ngModel)] = "userSettings.name" 
+             required #propertyTest= "ngModel" />
+
+        </div>
+        <!--
+        <h3>dirty : {{propertyTest.dirty}}</h3>
+        <h3>pristine : {{propertyTest.pristine}}</h3>
+        <h3>valid : {{propertyTest.valid}}</h3>
+        <h3>invalid : {{propertyTest.invalid}}</h3>
+        <h3>touched : {{propertyTest.touched}}</h3>
+        <h3>untouched : {{propertyTest.untouched}}</h3>
+-->
+        <div class="form-check form-group">
+                <input class="form-check-input" type="checkbox" value="" id="emailOffers" name="emailOffers" [(ngModel)] = "userSettings.emailOffers" 
+                >
+                <label class="form-check-label" for="emailOffers">
+                  Email Special Offers
+                </label>
+              </div>
+               <p>User interface Style</p>
+               <div class = "form-group">
+              <div class="btn-group">
+                <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle" 
+                name="interfaceStyle" btnRadio = "Light"     tabindex="0" role="button">Light</label>
+                <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle"
+                name="interfaceStyle"  btnRadio = "Medium"    tabindex="0" role="button">Medium</label>
+                <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle"
+                name="interfaceStyle"  btnRadio = "Dark"            tabindex="0" role="button">Dark</label>
+              </div> 
+              
+              <div class="form-group">
+                <label for="startDate">Start Date</label> 
+                <input type="text"
+                placeholder="Datepicker"
+                class="form-control"
+                id="startDate" [(ngModel)]= startDate name="startDate"
+                bsDatepicker>
+
+              </div> 
+             Start Date : {{startDate}}
+             
+              
+             
+             
+              
+            </div>
+           <div class="form-group">
+             
+              <rating [(ngModel)]="userRating" [max]="maxRating" [readonly]="isReadonly"
+               name = "userRating" id = "userRating"
+               [titles] = "['one','two', 'three']"></rating>
+              <div class="card">
+                  <pre class="card-block card-header" style="margin:15px 0;">Rate: <b>{{userRating}}</b> </pre>
+              </div>
+             
+          </div>
+
+                      <div class="form-group">
+                        <label for="subscriptionType">Subscription Type</label>
+                        <select multiple class="form-control" id="subscriptionType" name="subscriptionType" 
+                        [(ngModel)] = "userSettings.subscriptionType">
+                          <option *ngFor = "let type of subscriptionTypes | async">
+                            {{type}}
+                          </option>
+                          
+                                  
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="notes">Notes</label> 
+                        <textarea id="notes" class="form-control" rows="3"></textarea>
+
+                      </div> 
+                      <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" id="password">
+
+                      </div>
+
+                      
+
+                     <div [hidden]= "!postError" class="alert alert-danger">
+
+
+                      {{postErrorMessage}}
+
+                     </div> 
+        <button class = "btn btn-primary" >Send</button>
+    </form>
+
+</div>
+{{userSettings | json}}
+
+
